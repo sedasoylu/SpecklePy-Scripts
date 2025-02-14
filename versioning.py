@@ -7,35 +7,25 @@ import pandas as pd
 # This one will get the commit history in a stream and create a csv file to store it
 # plot_versioning.py will turn that csv into a nice plot of commit history!
 
-# Our MaCAD server!
-server_url = "YOUR SERVER URL"
 
 #This is the stream you want to plot the history of. 
 # Try changing it to your studio stream! 
-stream_url = "YOUR STREAM URL"
+project_id = "28a211b286"
 
 # Authenticate with the default account on your computer
-# (Just an alternative method to authenticate to the one in federation.py)
-# It will use your computer speckle account
-client = SpeckleClient(host = server_url)
+client = SpeckleClient(host = "macad.speckle.xyz")
 account = get_default_account()
 client.authenticate_with_account(account)
 
-# Get the stream ID so you can fetch the stream object itself
-wrapper = StreamWrapper (stream_url)
-stream_id = wrapper.stream_id 
-stream = client.stream.get(id=stream_id)
-
-# Now we are ready to begging extracting the data we will want to plot
-streamName = stream.name
-collaborators = stream.collaborators
-collaborators_names = [col.name for col in collaborators]
-branches = client.branch.list(stream_id, 100)
-branchesNames =  [branch.name for branch in branches]
-branch_index = {branch.name: i for i, branch in enumerate(branches)}
+# Get the Project (HyperBuilding B)
+project = client.project.get(project_id)
 
 # Get all the commits in the stream
-commits = client.commit.list(stream_id, 100)
+# This is an old method...
+commits = client.commit.list(project_id, 100)
+# In the new method, we would have to iterate trough models and gather versions
+# versions = client.version.get_versions(model_id, project_id, 100)
+
 # Create an empty list to store the information we are about to extract
 commit_data = []
 # For each commit, we create a dictionary (commit_info) that will become a row in our CSV.

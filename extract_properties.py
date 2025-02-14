@@ -54,6 +54,10 @@ dynamic_properties = child_obj.get_dynamic_member_names()
 surface_south = child_obj["tot surf South"]
 print(surface_south)
 
+# Check if a property exists
+if "SomeProp" not in all_properties:
+    print("Couldnt find SomeProp!")
+
 # Add a new property and push back to speckle
 child_obj["MyProp"] = "JustATest"
 
