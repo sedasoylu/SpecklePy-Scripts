@@ -7,7 +7,6 @@ import pandas as pd
 # This one will get the commit history in a stream and create a csv file to store it
 # plot_versioning.py will turn that csv into a nice plot of commit history!
 
-
 #This is the stream you want to plot the history of. 
 # Try changing it to your studio stream! 
 project_id = "28a211b286"
